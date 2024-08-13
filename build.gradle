@@ -55,8 +55,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     testImplementation 'org.ros.rosjava_messages:std_msgs:0.5.11'
     testImplementation 'org.ros.rosjava_messages:rosjava_test_msgs:0.3.0'
-
-    implementation 'io.github.sashirestela:simple-openai:3.6.0'
 }
 
 task javadocJar(type: Jar) {
