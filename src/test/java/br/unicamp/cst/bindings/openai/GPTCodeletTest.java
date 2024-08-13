@@ -32,27 +32,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 
 public class GPTCodeletTest {
+    final String OPENAI_API_KEY = System.getenv("OPENAI_API_KEY");
 
 
-
-    GPTCodelet gptCodelet = new GPTCodelet() {
-        final String OPENAI_API_KEY = "";
-        final String chatCompletionEndpoint = "https://api.openai.com/v1/chat/completions";
-        int i = 0;
-
-        SimpleOpenAI openAI = SimpleOpenAI.builder()
-                .apiKey(OPENAI_API_KEY)
-                //.apiKey(System.getenv("OPENAI_API_KEY"))
-                .build();
-
-        //
-        //        -H "Content-Type: application/json" \
-        //        -H "Authorization: Bearer $OPENAI_API_KEY" \
-        //        -d '{
-        //        "model": "gpt-4o-mini",
-        //        "messages": [{"role": "user", "content": "Say this is a test!"}],
-        //        "temperature": 0.7
-        //}'
+    GPTCodelet gptCodelet = new GPTCodelet(OPENAI_API_KEY) {
 
         public HashMap<String, Object> arrangeParams(String userMsg) {
             HashMap<String, Object> params = new HashMap<String, Object>();
