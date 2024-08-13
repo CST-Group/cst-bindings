@@ -11,8 +11,10 @@ description = "CST-Bindings"
 java {
    //sourceCompatibility = JavaVersion.VERSION_11
    //targetCompatibility = JavaVersion.VERSION_11
-   sourceCompatibility = JavaVersion.VERSION_1_8
-   targetCompatibility = JavaVersion.VERSION_1_8
+    //sourceCompatibility = JavaVersion.VERSION_1_8
+    //targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 version = '1.0.7'
@@ -56,6 +58,9 @@ dependencies {
     testImplementation 'org.ros.rosjava_messages:std_msgs:0.5.11'
     testImplementation 'org.ros.rosjava_messages:rosjava_test_msgs:0.3.0'
     implementation 'io.github.sashirestela:simple-openai:3.6.0'
+
+    implementation 'io.github.resilience4j:resilience4j-retry:2.1.0'
+    implementation 'io.github.hamawhitegg:langchain-core:0.2.2'
 }
 
 task javadocJar(type: Jar) {

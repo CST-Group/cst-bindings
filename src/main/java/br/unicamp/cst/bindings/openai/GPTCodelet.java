@@ -11,7 +11,7 @@
 
 package br.unicamp.cst.bindings.openai;
 
-import br.unicamp.cst.core.entities.Codelet;
+
 import br.unicamp.cst.io.rest.HttpCodelet;
 import io.github.sashirestela.openai.SimpleOpenAI;
 import io.github.sashirestela.openai.domain.chat.Chat;
@@ -70,18 +70,13 @@ public abstract class GPTCodelet extends HttpCodelet {
         HashMap<String, Object> config = new HashMap<>();
         config.put("temperature", 0.0);
         config.put("maxTokens", 300);
+        config.put("model", "gpt-4o-mini");
         return config;
     }
 
-    /*public HashMap<String, String> configOpenAI(){
-        HashMap<String, String> config = new HashMap<>();
-
-        return config;
-    }*/
-
     public String completionOpenAI(String systemContent, String userContent){
         ChatRequest chatRequest = ChatRequest.builder()
-                .model("gpt-4o-mini")
+                .model((String)config.get("gpt-4o-mini"))
                 .message(ChatMessage.SystemMessage.of(systemContent))
                 .message(ChatMessage.UserMessage.of(userContent))
                 .temperature((Double)config.get("temperature"))
@@ -89,22 +84,10 @@ public abstract class GPTCodelet extends HttpCodelet {
                 .build();
         CompletableFuture<Chat> futureChat = openAI.chatCompletions().create(chatRequest);
         Chat chatResponse = futureChat.join();
-        //System.out.println(chatResponse.firstContent());
         return chatResponse.firstContent();
     }
 
     public String completionOpenAI(String userContent){
-        /*ChatRequest chatRequest = ChatRequest.builder()
-                .model("gpt-4o-mini")
-                .message(ChatMessage.SystemMessage.of("You are an expert in AI."))
-                .message(ChatMessage.UserMessage.of(userContent))
-                .temperature(0.0)
-                .maxTokens(300)
-                .build();
-        CompletableFuture<Chat> futureChat = openAI.chatCompletions().create(chatRequest);
-        Chat chatResponse = futureChat.join();
-        //System.out.println(chatResponse.firstContent());
-        return chatResponse.firstContent();*/
         return completionOpenAI("You are an expert in AI.", userContent);
     }
 }

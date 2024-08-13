@@ -11,19 +11,7 @@
 package br.unicamp.cst.bindings.openai;
 
 import br.unicamp.cst.core.entities.Mind;
-import com.google.gson.JsonPrimitive;
-import io.github.sashirestela.openai.SimpleOpenAI;
-import io.github.sashirestela.openai.domain.chat.Chat;
-import io.github.sashirestela.openai.domain.chat.ChatMessage;
-import io.github.sashirestela.openai.domain.chat.ChatRequest;
-import org.json.JSONObject;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.concurrent.CompletableFuture;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -34,27 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class GPTCodeletTest {
     final String OPENAI_API_KEY = System.getenv("OPENAI_API_KEY");
 
-    GPTCodelet gptCodelet = new GPTCodelet(System.getenv(OPENAI_API_KEY)) {
-
-        /*public HashMap<String, Object> arrangeParams(String userMsg) {
-            HashMap<String, Object> params = new HashMap<String, Object>();
-
-            HashMap<String, Object> fullContent = new HashMap<>();
-            fullContent.put("role", "user");
-            fullContent.put("content", userMsg);
-            JSONObject json = new JSONObject(fullContent);
-
-
-            String message = "[" + json + "]";
-
-            params.put("Authorization", OPENAI_API_KEY);
-            params.put("model", "gpt-4o-mini");
-            params.put("messages", message);
-            params.put("temperature", 0.7);
-
-            return params;
-        } */
-
+    GPTCodelet gptCodelet = new GPTCodelet(OPENAI_API_KEY) {
 
         @Override
         public void accessMemoryObjects() {
@@ -69,17 +37,6 @@ public class GPTCodeletTest {
         @Override
         public void proc() {
             String userMsg = "Say this is a test!";
-            /*HashMap<String, Object> params = arrangeParams(userMsg);
-            String answer = "Nothing";
-            try {
-                if(i == 0){
-                answer = sendPOST(chatCompletionEndpoint, params, "application/json");
-                i++;}
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-             */
-
         }
     };
 
