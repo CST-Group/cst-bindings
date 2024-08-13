@@ -32,9 +32,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 
 public class GPTCodeletTest {
+    final String OPENAI_API_KEY = System.getenv("OPENAI_API_KEY");
 
-
-    GPTCodelet gptCodelet = new GPTCodelet(System.getenv("OPENAI_API_KEY")) {
+    GPTCodelet gptCodelet = new GPTCodelet(System.getenv(OPENAI_API_KEY)) {
 
         /*public HashMap<String, Object> arrangeParams(String userMsg) {
             HashMap<String, Object> params = new HashMap<String, Object>();
