@@ -663,7 +663,7 @@ public class SOARPlugin {
             Symbol v = wme.getValue();
             Identifier testv = v.asIdentifier();
             if (testv != null) { // The value is an identifier
-                Idea child = getWorldObject(testv, name + a.toString());
+                Idea child = getWorldObject(testv, name +"."+ a.toString());
                 newwo.add(child);
             } else { // The value is a property
                 Idea qd;
