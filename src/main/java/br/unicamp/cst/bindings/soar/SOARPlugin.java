@@ -645,6 +645,7 @@ public class SOARPlugin {
     -------------------------------------------------------------------------*/
 
     public Idea getWorldObject(Identifier id, String name) {
+        System.out.println("Get world object of name: " + name + " and Idenfifier: " + id.toString());
         Idea newwo = null;
         Iterator<Wme> It = id.getWmes();
         if (!It.hasNext()) {
