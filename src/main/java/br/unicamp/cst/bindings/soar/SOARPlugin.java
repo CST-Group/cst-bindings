@@ -671,6 +671,7 @@ public class SOARPlugin {
                 if (v.asDouble() != null) value = v.asDouble().getValue();
                 else if (v.asInteger() != null) value = v.asInteger().getValue();
                 else value = v.toString();
+                System.out.println("Value: " + value);
                 qd = new Idea(a.toString(), value);
                 Idea pp = new Idea(a.toString(), qd);
                 newwo.add(pp);
