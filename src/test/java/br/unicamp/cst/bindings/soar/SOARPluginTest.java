@@ -9,7 +9,8 @@ import org.jsoar.kernel.SoarException;
 import org.jsoar.kernel.symbols.Identifier;
 import org.jsoar.util.commands.SoarCommandInterpreter;
 import org.jsoar.util.commands.SoarCommands;
-import org.junit.Test;
+//import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
