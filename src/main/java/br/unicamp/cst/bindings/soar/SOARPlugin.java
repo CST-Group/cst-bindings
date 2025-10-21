@@ -617,7 +617,9 @@ public class SOARPlugin {
             javaObject = type.newInstance();
             type.cast(javaObject);
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e instanceof java.lang.ClassNotFoundException)
+                System.out.println("SOARPlugin was not able to create an instance of "+classname+" class ... Class Not Found!!");
+            else e.printStackTrace();
         }
         return (javaObject);
     }
@@ -694,7 +696,9 @@ public class SOARPlugin {
                     return (origin);
             }
         } catch (Exception e){
-            e.printStackTrace();
+            if (e instanceof java.lang.NumberFormatException)
+                System.out.println("SOARPlugin: The conversion of class "+className+" was not successful! ... NumberFormatException");
+            else e.printStackTrace();
             return null;
         }
     }

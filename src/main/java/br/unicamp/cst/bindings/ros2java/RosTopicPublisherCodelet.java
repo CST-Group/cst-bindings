@@ -27,10 +27,10 @@ public abstract class RosTopicPublisherCodelet<T extends Message> extends Codele
     protected JRos2Client ros2Client;
     protected TopicSubmissionPublisher<T> publisher;
 
-    public RosTopicPublisherCodelet(String topic, Class<T> messageType) {
+    public RosTopicPublisherCodelet(String name, String topic, Class<T> messageType) {
         this.topic = topic;
         this.messageType = messageType;
-        setName("Ros2Publisher:" + topic);
+        setName(name);
     }
 
     @Override

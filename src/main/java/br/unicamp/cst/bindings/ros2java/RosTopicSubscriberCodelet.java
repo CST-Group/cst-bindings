@@ -30,10 +30,10 @@ public abstract class RosTopicSubscriberCodelet<T extends Message> extends Codel
     protected JRos2Client ros2Client;
     protected TopicSubscriber<T> subscriber;
 
-    public RosTopicSubscriberCodelet(String topic, Class<T> messageType) {
+    public RosTopicSubscriberCodelet(String name, String topic, Class<T> messageType) {
         this.topic = topic;
         this.messageType = messageType;
-        setName("Ros2Subscriber:" + topic);
+        setName(name);
     }
 
     @Override

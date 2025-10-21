@@ -16,7 +16,7 @@ import id.jrosmessages.std_msgs.StringMessage;
 public class ROS2_ChatterTopicSubscriber extends RosTopicSubscriberCodelet<StringMessage> {
 
     public ROS2_ChatterTopicSubscriber(String topic) {
-        super(topic, StringMessage.class);
+        super("teste",topic, StringMessage.class);
     }
 
     @Override

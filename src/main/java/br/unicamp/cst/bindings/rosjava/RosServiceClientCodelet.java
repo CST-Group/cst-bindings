@@ -42,7 +42,7 @@ public abstract class RosServiceClientCodelet<S,T> extends Codelet implements No
 
 	protected String messageServiceType;
 
-	protected Memory motorMemory;
+	protected volatile Memory motorMemory;
 
 	protected S serviceMessageRequest;
 
@@ -115,7 +115,7 @@ public abstract class RosServiceClientCodelet<S,T> extends Codelet implements No
 	}
 
 	@Override
-	public void accessMemoryObjects() {
+	public synchronized void accessMemoryObjects() {
 		int index = 0;
 
 		if(motorMemory == null)
@@ -132,7 +132,7 @@ public abstract class RosServiceClientCodelet<S,T> extends Codelet implements No
 	}
 
 	@Override
-	public void proc() {
+	public synchronized void proc() {
 		if(motorMemory != null 
 				&& motorMemory.getI() != null 
 				&& serviceMessageRequest != null 

@@ -17,7 +17,7 @@ import java.net.URI;
 public class ROS2_ChatterTopicPublisher extends RosTopicPublisherCodelet<StringMessage> {
 
     public ROS2_ChatterTopicPublisher(String topic) {
-        super(topic, StringMessage.class);
+        super("teste",topic, StringMessage.class);
     }
 
     @Override
