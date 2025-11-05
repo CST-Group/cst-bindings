@@ -639,6 +639,7 @@ public class SOARPlugin {
     }
 
     public Object convertObject(Object origin, String className) {
+        if (origin == null) return null;
         String objectClass = origin.getClass().getName();
         try {
             switch (className) {
