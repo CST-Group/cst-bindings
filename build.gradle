@@ -46,19 +46,15 @@ configurations {
 }
 
 dependencies {
-    api('com.github.CST-Group:cst:1.5.0')
+    api('com.github.CST-Group:cst:1.6.0')
 
     api 'com.soartech:jsoar-core:4.1.3'
     api 'com.soartech:jsoar-debugger:4.1.3'
-    //api 'org.ros.rosjava_core:rosjava:0.3.6'
-    //implementation 'com.github.rosjava:rosjava_core:0.3.7'
     api 'com.github.rosjava:rosjava_core:0.3.7'
     api 'org.ros.rosjava_bootstrap:message_generation:0.3.3'
     api 'ch.qos.logback:logback-classic:1.0.11' // Used in JSoarCodelet
 
     testImplementation 'com.1stleg:jnativehook:2.1.0'
-    // These are necessary for JUnit4 tests
-    testImplementation 'junit:junit:4.12'
     // These are necessary for JUnit5 tests
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
