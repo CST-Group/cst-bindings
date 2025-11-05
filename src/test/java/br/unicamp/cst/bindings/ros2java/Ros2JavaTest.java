@@ -1,3 +1,13 @@
+/***********************************************************************************************
+ * Copyright (c) 2012  DCA-FEEC-UNICAMP
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
+ * Contributors:
+ * K. Raizer, A. L. O. Paraense, E. M. Froes, R. R. Gudwin - initial API and implementation
+ ***********************************************************************************************/
 package br.unicamp.cst.bindings.ros2java;
 
 import br.unicamp.cst.core.entities.MemoryObject;
@@ -14,23 +24,28 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import troca_ros.*;
 
 /**
  * @author jrborelli
  */
+@Execution(ExecutionMode.SAME_THREAD)
 public class Ros2JavaTest {
 
     private static final Logger LOGGER = Logger.getLogger(Ros2JavaTest.class.getName());
     private static Mind mind;
-    private static AddTwoIntsServiceProvider serviceProvider;
+    private static AddTwoIntsServiceProvider serviceProvider=null;
 
     @BeforeAll
     public static void setup() {
         SilenceLoggers();
         mind = new Mind();
-        serviceProvider = new AddTwoIntsServiceProvider();
-        serviceProvider.start();
+        if (serviceProvider == null) {
+            serviceProvider = new AddTwoIntsServiceProvider();
+            serviceProvider.start();
+        }
     }
 
     @AfterAll
@@ -217,10 +232,7 @@ public class Ros2JavaTest {
     public void testRosServiceClientCodeletAsync() throws InterruptedException {
         LOGGER.log(Level.INFO,"Starting ROS service client test...");
 
-        // Create a mock service provider for the test
-//        AddTwoIntsServiceProvider serviceProvider = new AddTwoIntsServiceProvider();
-//        serviceProvider.start();
-//        Thread.sleep(500); // Allow time for service to be discovered
+        // The server was started at setup
 
         // Instantiate the specialized client codelet
         RosServiceClientCodelet<AddTwoIntsRequestMessage, AddTwoIntsResponseMessage> clientCodelet = new RosServiceClientCodelet<>("add_two_ints", new AddTwoIntsServiceDefinition()) {
@@ -231,7 +243,9 @@ public class Ros2JavaTest {
 
             @Override
             protected boolean formatServiceRequest(Memory inputMemoryObject, AddTwoIntsRequestMessage request) {
-                Long[] inputs = (Long[]) inputMemoryObject.getI();
+                Object info = inputMemoryObject.getI();
+                if (!(info instanceof Long[])) return false; // This happens when the test was already executed and the codelet is running proc again !
+                Long[] inputs = (Long[]) info;
                 if (inputs == null || inputs.length < 2) return false;
                 request.withA(inputs[0]);
                 request.withB(inputs[1]);
@@ -276,7 +290,7 @@ public class Ros2JavaTest {
         assertEquals(Long.valueOf(30L), actualSum);
 
         // Cleanup
-        //mind.shutDown();
+        mind.shutDown();
         clientCodelet.stop();
         //serviceProvider.stop();
         
@@ -287,9 +301,7 @@ public class Ros2JavaTest {
     public void testRos2ServiceSync() throws InterruptedException, ExecutionException, TimeoutException {
         LOGGER.log(Level.INFO, "Starting 2nd test...");
         
-        // Start the server
-//        AddTwoIntsServiceProvider serviceProvider = new AddTwoIntsServiceProvider();
-//        serviceProvider.start();
+        // Start the server - the server was started at setup
         
         // Start the client
         AddTwoIntsServiceClientSyncRos2 clientSync = new AddTwoIntsServiceClientSyncRos2("add_two_ints");
@@ -310,7 +322,6 @@ public class Ros2JavaTest {
         assertEquals(expectedSum2, actualSum2);
 
         clientSync.stop();
-        //serviceProvider.stop();
         
         LOGGER.log(Level.INFO, "It took {0}", new Object[]{TimeStamp.getDelaySinceStart()});
     }

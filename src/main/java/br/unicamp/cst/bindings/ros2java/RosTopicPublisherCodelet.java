@@ -82,14 +82,19 @@ public abstract class RosTopicPublisherCodelet<T extends Message> extends Codele
         }
     }
 
-    /** Create a fresh message to be filled and published */
+    /** Create a fresh message to be filled and published 
+     * @return the new message created
+     */
     protected abstract T createNewMessage();
 
-    /** Fill the message using memory content */
+    /** Fill the message using memory content 
+     * @param motorMemory the motor memory where this codelet reads information
+     * @param message the message to be published
+     */
     protected abstract void fillMessageToBePublished(Memory motorMemory, T message);
 }
 
-/* // Exemplo de uso:
+/* // Use Exemple:
 
 RosTopicPublisherCodelet<StringMessage> pub = new RosTopicPublisherCodelet<>("/chatter", StringMessage.class) {
     @Override

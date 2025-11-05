@@ -90,11 +90,13 @@ public abstract class RosTopicSubscriberCodelet<T extends Message> extends Codel
 
     /**
      * Fill the sensory memory with the latest received message.
+     * @param message the message to be used to fill the memory
+     * @param sensoryMemory the sensory memory to be updated with the message
      */
     public abstract void fillMemoryWithReceivedMessage(T message, Memory sensoryMemory);
 }
 
-/* Exemplo de uso:
+/* Use example:
 import br.unicamp.cst.bindings.ros2java.RosTopicSubscriberCodelet;
 import br.unicamp.cst.core.entities.Memory;
 import id.jrosmessages.std_msgs.StringMessage;

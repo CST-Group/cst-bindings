@@ -1,6 +1,13 @@
-/**
- * 
- */
+/***********************************************************************************************
+ * Copyright (c) 2012  DCA-FEEC-UNICAMP
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
+ * Contributors:
+ * K. Raizer, A. L. O. Paraense, E. M. Froes, R. R. Gudwin - initial API and implementation
+ ***********************************************************************************************/
 package br.unicamp.cst.bindings.ros2java;
 
 import br.unicamp.cst.core.entities.Memory;
@@ -35,26 +42,3 @@ public class ROS2_ChatterTopicPublisher extends RosTopicPublisherCodelet<StringM
         }
     }
 }
-
-/*
-// Setup CST Mind and Memory:
-Mind mind = new Mind();
-
-ChatterTopicPublisher publisher = new ChatterTopicPublisher("chatter");
-Memory motorMemory = mind.createMemoryObject("chatter");
-publisher.addInput(motorMemory);
-
-mind.insertCodelet(publisher);
-
-// Set message to publish
-motorMemory.setI("Hello ROS2 from CST!");
-
-// Start mind, let publisher run for a few cycles
-mind.start();
-
-// Sleep a bit to allow publishing
-Thread.sleep(2000);
-
-// Then shutdown mind
-mind.shutDown();
-*/
