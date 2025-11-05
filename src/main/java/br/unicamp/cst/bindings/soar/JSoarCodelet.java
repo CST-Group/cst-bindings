@@ -104,6 +104,7 @@ public abstract class JSoarCodelet extends Codelet {
             } catch (Exception e) {
                 //e.printStackTrace();
                 System.out.println("I was not able to find the class "+package_with_beans_classes + "." + commandType);
+                return(null);
             }
             for (Idea p : command.getL()) {
                 try {
