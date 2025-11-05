@@ -657,7 +657,7 @@ public class SOARPlugin {
                 case "java.lang.Float": {
                     float value;
                     if (objectClass.equals("java.lang.String")) {
-                        value = tryParseFloat((String) origin);
+                        value = Float.parseFloat((String) origin);
                     } else {
                         value = ((Number) origin).floatValue();
                     }
