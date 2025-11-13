@@ -28,7 +28,7 @@ Note: This library is still under development, and some concepts or features mig
 ```
 	dependencies {
             ...
-            implementation 'com.github.CST-Group:cst-bindings:1.1.2'
+            implementation 'com.github.CST-Group:cst-bindings:1.1.6'
 	}
 ```
 
@@ -53,7 +53,7 @@ Sometimes, the version number (tag) in this README gets out of date, as maintain
 	<dependency>
 	    <groupId>com.github.CST-Group</groupId>
 	    <artifactId>cst-bindings</artifactId>
-	    <version>1.1.2</version>
+	    <version>1.1.6</version>
 	</dependency>
 ```
 
@@ -82,6 +82,7 @@ The CST toolkit has been used successfully in a number of MS and PhD thesis in o
 ## Requirements
 
 CST requires at minimum Java 8.
+CST-Bindings requires at minimum Java 17 (due to the ROS2 packages we use)
 
 ### Authors and Contributors
 The main contributors of this project are:
