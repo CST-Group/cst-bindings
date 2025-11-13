@@ -25,6 +25,18 @@ import pinorobotics.jrosservices.msgs.ServiceDefinition;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * The RosServiceClientCodelet is an abstract general codelet to be used as a codelet having a Memory as Input, 
+ * meant to have the same name as the codelet itself and using the I field of this Memory as the input
+ * to a ROS2 service. The RosServiceClientCodelet, in being an abstract codelet, must be extended by
+ * another class, where the createNewRequest, formatServiceRequest and processServiceResponse must
+ * be implemented, according to the specific Messages used as Request and Response for the ROS2 Service. 
+ * In practice, this codelet uses the info I as data for using a ROS2 Service to do something useful. 
+ * 
+ * @author jrborelli & rgudwin
+ * @param <S> the RequestMessage for the ROS2 Service
+ * @param <T> the ResponseMessage for the ROS2 Service
+ */
 public abstract class RosServiceClientCodelet<S extends Message, T extends Message> extends Codelet {
 
     protected String serviceName;
@@ -40,7 +52,6 @@ public abstract class RosServiceClientCodelet<S extends Message, T extends Messa
     public RosServiceClientCodelet(String serviceName, ServiceDefinition<S, T> serviceDefinition) {
         this.serviceName = serviceName;
         this.serviceDefinition = serviceDefinition;
-        this.setName("Ros2Client:" + serviceName);
     }
 
     @Override
@@ -68,7 +79,7 @@ public abstract class RosServiceClientCodelet<S extends Message, T extends Messa
     @Override
     public void accessMemoryObjects() {
         if (inputMemory == null) {
-            inputMemory = this.getInput(serviceName, 0);
+            inputMemory = this.getInput(this.getName(), 0);
         }
     }
 
@@ -115,10 +126,16 @@ public abstract class RosServiceClientCodelet<S extends Message, T extends Messa
 
     /**
      * Create a new empty request message instance.
-     * @return an object of type S
+     * This method cannot be automatically set up because it depends on the 
+     * RequestMessage type used in the service. To Generate the Java classes
+     * for RequestMessage and ResponseMessage classes, together with the 
+     * ServiceDefinition class one should be using the msgmonster package 
+     * available at https://github.com/pinorobotics/msgmonster together with
+     * the .msg and .srv files where the service's interface is defined. 
+     * @return a proper instance of a RequestMessage according to the service interface
      */
     protected abstract S createNewRequest();
-    /*@Override //exemplo:
+    /*@Override //exemple: assuming the AddTwoInts ROS2 service ...
     protected AddTwoIntsRequestMessage createNewRequest() {
         return new AddTwoIntsRequestMessage();
     } */
@@ -126,7 +143,7 @@ public abstract class RosServiceClientCodelet<S extends Message, T extends Messa
     
 
     /**
-     * Fill the request message from input memory.
+     * Fills the request message using the information available from memory.
      * @param memory 
      * @param request
      * @return true if the request should be sent.
@@ -145,7 +162,8 @@ public abstract class RosServiceClientCodelet<S extends Message, T extends Messa
     
 
     /**
-     * Handle the response message.
+     * If necessary, handles the response message obtained after running the ROS2 service.
+     * If the service in itself do all that is necessary, this method could simply do nothing. 
      * @param response the response message to be processed
      */
     protected abstract void processServiceResponse(T response);

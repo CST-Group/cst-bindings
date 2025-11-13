@@ -261,6 +261,7 @@ public class Ros2JavaTest {
                 }
             }
         };
+        clientCodelet.setName("add_two_ints");
 
         // Create a memory object to hold the input and output
         MemoryObject internalMemory = mind.createMemoryObject("add_two_ints");
