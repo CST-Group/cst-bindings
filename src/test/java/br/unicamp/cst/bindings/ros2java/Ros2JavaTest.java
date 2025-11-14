@@ -122,8 +122,8 @@ public class Ros2JavaTest {
     public void testChatterTopicSpecializedCodelets() throws InterruptedException {
 
         // Instantiate both specialized classes
-        ROS2_ChatterTopicPublisher publisher = new ROS2_ChatterTopicPublisher("chatter2");
-        ROS2_ChatterTopicSubscriber subscriber = new ROS2_ChatterTopicSubscriber("chatter2");
+        ROS2_ChatterTopicPublisher publisher = new ROS2_ChatterTopicPublisher("chatter2","chatter2");
+        ROS2_ChatterTopicSubscriber subscriber = new ROS2_ChatterTopicSubscriber("chatter2","chatter2");
 
         // Create a memory object to link them
         MemoryObject internalMemory = mind.createMemoryObject("chatter2");
@@ -166,7 +166,7 @@ public class Ros2JavaTest {
     public void testOneShotPublisher() throws InterruptedException {
 
         // Instantiate the one-shot publisher
-        RosTopicOneShotPublisherCodelet<StringMessage> oneShotPublisher = new RosTopicOneShotPublisherCodelet<>("one_shot_chatter", StringMessage.class) {
+        RosTopicOneShotPublisherCodelet<StringMessage> oneShotPublisher = new RosTopicOneShotPublisherCodelet<>("one_shot_chatter","one_shot_chatter",StringMessage.class) {
             @Override
             public void fillMessageToBePublished(Memory motorMemory, StringMessage message) {
                 Object data = motorMemory.getI();
@@ -184,7 +184,7 @@ public class Ros2JavaTest {
         };
 
         // Instantiate the subscriber
-        ROS2_ChatterTopicSubscriber subscriber = new ROS2_ChatterTopicSubscriber("one_shot_chatter");
+        ROS2_ChatterTopicSubscriber subscriber = new ROS2_ChatterTopicSubscriber("one_shot_chatter","one_shot_chatter");
 
         // Create a memory object to link them
         MemoryObject internalMemory = mind.createMemoryObject("one_shot_chatter");

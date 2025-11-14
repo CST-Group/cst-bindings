@@ -59,7 +59,7 @@ public abstract class RosTopicPublisherCodelet<T extends Message> extends Codele
     @Override
     public void accessMemoryObjects() {
         if (motorMemory == null) {
-            motorMemory = getInput(topic, 0);
+            motorMemory = getInput(this.getName(), 0);
         }
     }
 

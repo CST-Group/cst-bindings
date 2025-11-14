@@ -67,7 +67,7 @@ public abstract class RosTopicSubscriberCodelet<T extends Message> extends Codel
     @Override
     public void accessMemoryObjects() {
         if (sensoryMemory == null) {
-            sensoryMemory = this.getOutput(topic, 0);
+            sensoryMemory = this.getOutput(this.getName(), 0);
         }
     }
 

@@ -31,10 +31,10 @@ public abstract class RosTopicOneShotPublisherCodelet<T extends Message> extends
 
     private volatile boolean enabled = false;
 
-    public RosTopicOneShotPublisherCodelet(String topic, Class<T> messageType) {
+    public RosTopicOneShotPublisherCodelet(String name, String topic, Class<T> messageType) {
         this.topic = topic;
         this.messageType = messageType;
-        setName("Ros2Publisher:" + topic);
+        setName(name);
     }
 
     @Override
@@ -65,7 +65,7 @@ public abstract class RosTopicOneShotPublisherCodelet<T extends Message> extends
     @Override
     public void accessMemoryObjects() {
         if (motorMemory == null) {
-            motorMemory = getInput(topic, 0);
+            motorMemory = getInput(this.getName(), 0);
         }
     }
 
