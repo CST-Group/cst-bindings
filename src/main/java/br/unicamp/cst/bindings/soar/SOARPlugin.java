@@ -618,8 +618,13 @@ public class SOARPlugin {
             type.cast(javaObject);
         } catch (Exception e) {
             if (e instanceof java.lang.ClassNotFoundException)
-                System.out.println("SOARPlugin was not able to create an instance of "+classname+" class ... Class Not Found!!");
+                System.out.println("SOARPlugin was not able to create an instance of "+classname+" class ... Class Not Found Exception!!");
             else e.printStackTrace();
+           
+        }catch (Throwable t) {
+            if (t instanceof java.lang.NoClassDefFoundError)
+                System.out.println("SOARPlugin was not able to create an instance of "+classname+" class ... Class Not Found Error!!");
+            else t.printStackTrace();
         }
         return (javaObject);
     }
